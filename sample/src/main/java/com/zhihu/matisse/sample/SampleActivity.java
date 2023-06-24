@@ -84,7 +84,7 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                 Matisse.from(SampleActivity.this)
                         .choose(MimeType.ofImage(), false)
                         .countable(true)
-                        .capture(true)
+                        .capture(false)
                         .captureStrategy(
                                 new CaptureStrategy(true, "com.zhihu.matisse.sample.fileprovider", "test"))
                         .maxSelectable(9)
