@@ -71,7 +71,11 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                     if (aBoolean) {
                         startAction(v);
                     } else {
-                        Toast.makeText(SampleActivity.this, R.string.permission_request_denied, Toast.LENGTH_LONG)
+                        Toast.makeText(
+                                        SampleActivity.this,
+                                        R.string.permission_request_denied,
+                                        Toast.LENGTH_LONG
+                                )
                                 .show();
                     }
                 }, Throwable::printStackTrace);
@@ -84,9 +88,9 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                 Matisse.from(SampleActivity.this)
                         .choose(MimeType.ofImage(), false)
                         .countable(true)
-                        .capture(false)
+                        .capture(true)
                         .captureStrategy(
-                                new CaptureStrategy(true, "com.zhihu.matisse.sample.fileprovider", "test"))
+                                new CaptureStrategy(true, "test"))
                         .maxSelectable(9)
                         .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
                         .gridExpectedSize(
@@ -164,7 +168,8 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
         @Override
         public UriViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             return new UriViewHolder(
-                    LayoutInflater.from(parent.getContext()).inflate(R.layout.uri_item, parent, false));
+                    LayoutInflater.from(parent.getContext())
+                            .inflate(R.layout.uri_item, parent, false));
         }
 
         @Override

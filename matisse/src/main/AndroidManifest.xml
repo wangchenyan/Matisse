@@ -38,5 +38,15 @@
             android:name="com.zhihu.matisse.internal.ui.SelectedPreviewActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
+        <provider
+            android:name=".MatisseFileProvider"
+            android:authorities="${applicationId}.matisse.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/matisse_file_paths" />
+        </provider>
     </application>
 </manifest>

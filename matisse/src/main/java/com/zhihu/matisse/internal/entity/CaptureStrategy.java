@@ -15,19 +15,19 @@
  */
 package com.zhihu.matisse.internal.entity;
 
+/**
+ * 仅支持保存在私有目录
+ */
 public class CaptureStrategy {
-
-    public final boolean isPublic;
-    public final String authority;
+    public final boolean isCache;
     public final String directory;
 
-    public CaptureStrategy(boolean isPublic, String authority) {
-        this(isPublic, authority, null);
-    }
-
-    public CaptureStrategy(boolean isPublic, String authority, String directory) {
-        this.isPublic = isPublic;
-        this.authority = authority;
+    /**
+     * @param isCache   是否保存在私有目录的缓存中
+     * @param directory 子路径
+     */
+    public CaptureStrategy(boolean isCache, String directory) {
+        this.isCache = isCache;
         this.directory = directory;
     }
 }
