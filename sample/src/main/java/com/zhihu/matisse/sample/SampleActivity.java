@@ -19,12 +19,16 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +36,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.AppUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
@@ -61,12 +66,26 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
         recyclerView.setAdapter(mAdapter = new UriAdapter());
     }
 
-    // <editor-fold defaultstate="collapsed" desc="onClick">
     @SuppressLint("CheckResult")
     @Override
     public void onClick(final View v) {
+        String[] permissions;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+                && AppUtils.getAppTargetSdkVersion() >= Build.VERSION_CODES.TIRAMISU
+        ) {
+            permissions = new String[]{
+                    Manifest.permission.READ_MEDIA_IMAGES,
+                    Manifest.permission.READ_MEDIA_AUDIO,
+                    Manifest.permission.READ_MEDIA_VIDEO
+            };
+        } else {
+            permissions = new String[]{
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+            };
+        }
         RxPermissions rxPermissions = new RxPermissions(this);
-        rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        rxPermissions.request(permissions)
                 .subscribe(aBoolean -> {
                     if (aBoolean) {
                         startAction(v);
@@ -179,6 +198,9 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
 
             holder.mUri.setAlpha(position % 2 == 0 ? 1.0f : 0.54f);
             holder.mPath.setAlpha(position % 2 == 0 ? 1.0f : 0.54f);
+
+            Bitmap bitmap = BitmapFactory.decodeFile(mPaths.get(position));
+            holder.mPreview.setImageBitmap(bitmap);
         }
 
         @Override
@@ -190,11 +212,13 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
 
             private TextView mUri;
             private TextView mPath;
+            private ImageView mPreview;
 
             UriViewHolder(View contentView) {
                 super(contentView);
                 mUri = (TextView) contentView.findViewById(R.id.uri);
                 mPath = (TextView) contentView.findViewById(R.id.path);
+                mPreview = contentView.findViewById(R.id.preview);
             }
         }
     }
