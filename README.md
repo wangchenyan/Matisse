@@ -8,9 +8,10 @@ Forked from [zhihu/Matisse](https://github.com/zhihu/Matisse)
 
 ### 0.5.4
 
-- Support Android 13
+- 适配 Android 13
+- 无需在调用前申请存储权限，组件内部自动申请权限
 - Fix issue: https://github.com/zhihu/Matisse/issues/812
-- Change capture to only support storage in private directories
+- 拍照仅支持存储在私有目录
 
 ## Usage
 

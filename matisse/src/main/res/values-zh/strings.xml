@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!--
   Copyright 2017 Zhihu Inc.
 
@@ -37,4 +38,6 @@
     <string name="button_original">原图</string>
     <string name="button_sure_default">确定</string>
     <string name="button_sure">确定(%1$d)</string>
+
+    <string name="matisse_not_grant_storage_permission">未授予存储权限</string>
 </resources>
