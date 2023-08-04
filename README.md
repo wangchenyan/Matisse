@@ -8,6 +8,7 @@ Forked from [zhihu/Matisse](https://github.com/zhihu/Matisse)
 
 ### 0.5.4
 
+- Support Android 13
 - Fix issue: https://github.com/zhihu/Matisse/issues/812
 - Change capture to only support storage in private directories
 
